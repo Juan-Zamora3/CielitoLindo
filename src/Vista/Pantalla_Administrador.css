@@ -1,0 +1,148 @@
+/* --- Contenedor principal con padding y altura flexible --- */
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh; /* Para que crezca según contenido */
+  background: linear-gradient(to bottom, #8e226c, #d88a9a);
+  color: white;
+  font-family: "Arial", sans-serif;
+  padding: 30px 20px;
+  box-sizing: border-box;
+}
+
+h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+h2 span {
+  color: #ffcc00;
+}
+
+h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+/* --- Formulario de Vinos --- */
+.gestion-vinos {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px; /* Separa del botón de historial */
+}
+
+.gestion-vinos input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.gestion-vinos input::placeholder {
+  color: #888;
+}
+
+/* Botón principal */
+.btn-principal {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right, #ff3366, #cc0033);
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+.btn-principal:hover {
+  background: linear-gradient(to right, #cc0033, #ff3366);
+}
+
+/* --- Vista Previa de Imagen --- */
+.preview-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.imagen-preview {
+  width: 100%;
+  max-width: 180px; /* Ajusta para que no ocupe demasiado espacio */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Botón para ver historial --- */
+.historial-container {
+  margin-bottom: 20px;
+}
+.btn-historial {
+  padding: 12px;
+  background: #ffcc00;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  color: #8e226c;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.btn-historial:hover {
+  background: #ff9900;
+}
+
+/* --- Modal de Historial --- */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+}
+.modal-content h3 {
+  color: #8e226c;
+}
+.modal-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+.modal-content li {
+  background: #f8f8f8;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+  color: #555;
+}
+.btn-cerrar {
+  padding: 10px;
+  background: #ff3366;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.btn-cerrar:hover {
+  background: #cc0033;
+}

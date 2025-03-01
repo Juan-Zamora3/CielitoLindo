@@ -1,0 +1,144 @@
+/* Contenedor principal */
+.mesero-container {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #8e226c, #d88a9a);
+  font-family: "Arial", sans-serif;
+  color: #fff;
+  position: relative;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Encabezado con logo */
+.mesero-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.logo-negocio {
+  width: 200px;
+  max-width: 80%;
+}
+
+/* Título principal */
+h2 {
+  margin: 10px 0;
+}
+
+/* Grid de Mesas */
+.mesas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 30px;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.mesa-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.mesa-item img {
+  width: 80px;
+  height: 80px;
+}
+.mesa-item p {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #ffcc00;
+}
+.mesa-item:hover {
+  transform: scale(1.05);
+}
+
+/* Grid de Vinos */
+.vinos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+.vino-item {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  text-align: center;
+}
+.vino-item img {
+  width: 100px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.vino-item p {
+  margin: 5px 0 2px;
+  font-size: 14px;
+  color: #fff;
+}
+.vino-item span {
+  font-size: 14px;
+  color: #ffcc00;
+}
+.vino-item:hover {
+  transform: translateY(-5px);
+}
+
+/* Modal de compra */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  color: #333;
+}
+.vino-detalle-img {
+  width: 150px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.btn-confirm,
+.btn-cancel {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.btn-confirm {
+  background: #ffcc00;
+  color: #8e226c;
+  font-weight: bold;
+}
+.btn-confirm:hover {
+  background: #ff9900;
+}
+.btn-cancel {
+  background: #ccc;
+  color: #333;
+}
+.btn-cancel:hover {
+  background: #aaa;
+}

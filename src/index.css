@@ -13,6 +13,32 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (max-width: 1024px) {
+  .grid-menu {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  .gestion-vinos, .ordenes-container {
+      width: 95%;
+  }
+  .vino-item img {
+      width: 80px;
+      height: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-menu {
+      grid-template-columns: 1fr;
+  }
+  .gestion-vinos, .ordenes-container {
+      max-width: 100%;
+  }
+  .vino-item img {
+      width: 70px;
+      height: 100px;
+  }
+}
+
 a {
   font-weight: 500;
   color: #646cff;

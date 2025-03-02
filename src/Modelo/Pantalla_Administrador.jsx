@@ -1,131 +1,98 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../Controlador/firebaseConfig"; // Sin usar Storage
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { db } from "../Controlador/firebaseConfig";
+import { collection, getDocs, updateDoc, doc, addDoc, deleteDoc } from "firebase/firestore";
 import "../Vista/Pantalla_Administrador.css";
 
 const PantallaAdministrador = () => {
+  const [vista, setVista] = useState(null);
+  const [vinos, setVinos] = useState([]);
+  const [ordenes, setOrdenes] = useState([]);
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState("");
-  const [imagenFile, setImagenFile] = useState(null);
-  const [imagenPreview, setImagenPreview] = useState(null);
-  const [historial, setHistorial] = useState([]);
-  const [modalHistorial, setModalHistorial] = useState(false);
+  const [descripcion, setDescripcion] = useState("");
+  const [region, setRegion] = useState("");
+  const [imagenURL, setImagenURL] = useState("");
 
   useEffect(() => {
-    const obtenerHistorial = async () => {
-      const snapshot = await getDocs(collection(db, "pedidos")); // <-- Cambiado a "pedidos"
-      setHistorial(snapshot.docs.map((doc) => doc.data()));
+    const obtenerVinos = async () => {
+      const snapshot = await getDocs(collection(db, "vinos"));
+      setVinos(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
     };
-    obtenerHistorial();
+    obtenerVinos();
   }, []);
-  
 
-  // Al seleccionar imagen, generamos un preview en base64
-  const manejarSeleccionImagen = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    setImagenFile(file);
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImagenPreview(reader.result); // data URL base64
+  useEffect(() => {
+    const obtenerOrdenes = async () => {
+      const snapshot = await getDocs(collection(db, "pedidos"));
+      setOrdenes(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
     };
-    reader.readAsDataURL(file);
-  };
+    obtenerOrdenes();
+  }, []);
 
   const agregarVino = async () => {
-    if (!nombre || !precio || !imagenPreview) {
-      return alert("Faltan datos (nombre, precio o imagen).");
-    }
-
-    // Guardar en Firestore como base64
     await addDoc(collection(db, "vinos"), {
       nombre,
       precio,
-      imagenURL: imagenPreview,
+      descripcion,
+      region,
+      imagenURL,
     });
+    alert("Vino agregado correctamente");
+  };
 
-    // Limpiar campos
-    setNombre("");
-    setPrecio("");
-    setImagenFile(null);
-    setImagenPreview(null);
+  const eliminarVino = async (id) => {
+    await deleteDoc(doc(db, "vinos", id));
+    alert("Vino eliminado");
+  };
 
-    alert("Vino agregado exitosamente (imagen guardada en base64).");
+  const finalizarOrden = async (id) => {
+    await updateDoc(doc(db, "pedidos", id), { finalizado: true });
+    alert("Orden marcada como finalizada");
   };
 
   return (
     <div className="admin-container">
-      <h2>
-        Bienvenido, <span>Administrador</span>
-      </h2>
+      {!vista && (
+        <div className="grid-menu">
+          <div className="menu-item" onClick={() => setVista("vinos")}>Gestión de Vinos</div>
+          <div className="menu-item" onClick={() => setVista("ordenes")}>Órdenes</div>
+        </div>
+      )}
 
-      <div className="gestion-vinos">
-        <h3>Agregar Vino</h3>
-        <input
-          type="text"
-          placeholder="Nombre"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Precio"
-          value={precio}
-          onChange={(e) => setPrecio(e.target.value)}
-        />
-
-        <input
-          type="file"
-          accept="image/*"
-          onChange={manejarSeleccionImagen}
-        />
-
-        {/* Vista previa de la imagen */}
-        {imagenPreview && (
-          <div className="preview-container">
-            <img
-              src={imagenPreview}
-              alt="Vista previa"
-              className="imagen-preview"
-            />
+      {vista === "vinos" && (
+        <div className="gestion-vinos">
+          <h2>Gestión de Vinos</h2>
+          <input type="text" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+          <input type="number" placeholder="Precio" value={precio} onChange={(e) => setPrecio(e.target.value)} />
+          <input type="text" placeholder="Descripción" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} />
+          <input type="text" placeholder="Región" value={region} onChange={(e) => setRegion(e.target.value)} />
+          <input type="text" placeholder="Imagen URL" value={imagenURL} onChange={(e) => setImagenURL(e.target.value)} />
+          <button onClick={agregarVino}>Agregar Vino</button>
+          <div className="vinos-grid">
+            {vinos.map((vino) => (
+              <div key={vino.id} className="vino-item">
+                <img src={vino.imagenURL} alt={vino.nombre} />
+                <p>{vino.nombre}</p>
+                <button onClick={() => eliminarVino(vino.id)}>Eliminar</button>
+              </div>
+            ))}
           </div>
-        )}
+          <button onClick={() => setVista(null)}>Volver</button>
+        </div>
+      )}
 
-        <button onClick={agregarVino} className="btn-principal">
-          Agregar
-        </button>
-      </div>
-
-      <div className="historial-container">
-        <button
-          className="btn-historial"
-          onClick={() => setModalHistorial(true)}
-        >
-          Ver Historial de Compras
-        </button>
-      </div>
-
-      {modalHistorial && (
-        <div className="modal">
-          <div className="modal-content">
-            <h3>Historial de Compras</h3>
-            <ul>
-              {historial.map((compra, index) => (
-                <li key={index}>
-                  Mesa {compra.mesa} - {compra.vino} -{" "}
-                  <strong>${compra.precio}</strong>
-                </li>
-              ))}
-            </ul>
-            <button
-              className="btn-cerrar"
-              onClick={() => setModalHistorial(false)}
-            >
-              Cerrar
-            </button>
-          </div>
+      {vista === "ordenes" && (
+        <div className="ordenes-container">
+          <h2>Órdenes</h2>
+          <ul>
+            {ordenes.map((orden) => (
+              <li key={orden.id}>
+                Mesa {orden.mesa} - {orden.vino} - ${orden.precio}
+                {!orden.finalizado && <button onClick={() => finalizarOrden(orden.id)}>Finalizar</button>}
+              </li>
+            ))}
+          </ul>
+          <button onClick={() => setVista(null)}>Volver</button>
         </div>
       )}
     </div>

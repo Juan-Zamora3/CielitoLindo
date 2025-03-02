@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import "../Vista/Login.css";
 import logo from "../assets/logo.png";
 import logovino from "../assets/logovino.png";
+import wineee from "../assets/wineee.png";
+import rellenoColor2 from "../assets/rellenoColor2.png";
+import fondo from "../assets/fondo.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -63,13 +66,27 @@ const Login = () => {
   };
 
   return (
-    <div className={`login-container ${isLoading ? "fade-out" : ""}`}>
+    <div 
+      className={`login-container ${isLoading ? "fade-out" : ""}`} 
+      style={{
+        backgroundImage: `url(${fondo})`, 
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        height: "100vh",
+        width: "100vw"
+      }}
+    >
       {isLoading && (
         <div className="loading-screen">
           <div className="spinner"></div>
           <p>Cargando...</p>
         </div>
       )}
+
+      {/* Imágenes adicionales */}
+      <img src={rellenoColor2} alt="Relleno Color" className="relleno-color" />
+      <img src={wineee} alt="Vino" className="wineee-logo" />
 
       <div className="left-panel">
         <div className="logo-container">

@@ -2,13 +2,22 @@
 .mesero-container {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #8e226c, #d88a9a);
+  
   font-family: "Arial", sans-serif;
   color: #fff;
   position: relative;
   padding: 20px;
   box-sizing: border-box;
   text-align: center;
+  background: rgba(0, 0, 0, 0.4); /* Más oscuro para resaltar el texto */
+  backdrop-filter: blur(15px); /* Más desenfoque para mayor efecto de cristal */
+  border: 2px solid rgba(255, 255, 255, 0.3); /* Borde blanco con opacidad */
+
+  /* Sombra sutil */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  min-height: 80vh; /* Evita que llegue hasta el borde superior e inferior */
+  
+  margin: 10vh auto; /* Margen superior e inferior de 10% */
 }
 
 /* Encabezado con logo */
@@ -44,13 +53,15 @@ h2 {
   transition: transform 0.2s;
 }
 .mesa-item img {
-  width: 80px;
-  height: 80px;
+  width: auto;
+  height: auto;
+  max-width: 90%;
+  max-height: 90%;
 }
 .mesa-item p {
   margin-top: 5px;
-  font-size: 16px;
-  color: #ffcc00;
+  font-size: 125%;
+  color: #ffffff;
 }
 .mesa-item:hover {
   transform: scale(1.05);
@@ -73,8 +84,8 @@ h2 {
   text-align: center;
 }
 .vino-item img {
-  width: 100px;
-  height: 140px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 5px;
 }
@@ -85,7 +96,7 @@ h2 {
 }
 .vino-item span {
   font-size: 14px;
-  color: #ffcc00;
+  color: #ffffff;
 }
 .vino-item:hover {
   transform: translateY(-5px);
@@ -104,7 +115,7 @@ h2 {
   align-items: center;
 }
 .modal-content {
-  background: #fff;
+  background: #b3b3b3;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
@@ -128,15 +139,15 @@ h2 {
   cursor: pointer;
 }
 .btn-confirm {
-  background: #ffcc00;
-  color: #8e226c;
+  background: #81024c;
+  color: #ffffff;
   font-weight: bold;
 }
 .btn-confirm:hover {
   background: #ff9900;
 }
 .btn-cancel {
-  background: #ccc;
+  background: #ffffff;
   color: #333;
 }
 .btn-cancel:hover {

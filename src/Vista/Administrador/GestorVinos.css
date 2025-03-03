@@ -1,0 +1,136 @@
+.gestion-vinos {
+  background: rgba(108, 18, 56, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+  
+  width: 90%;
+  text-align: center;
+}
+
+/* Barra de búsqueda y botón de agregar */
+.busqueda-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.busqueda-container input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.busqueda-container button {
+  padding: 10px 15px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Formulario de agregar vino */
+.formulario-vino {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.formulario-vino input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.formulario-vino button {
+  grid-column: span 2;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Sección de vinos en grid */
+.vinos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  align-items: stretch;
+}
+
+.vino-item{
+  display: flex;
+}
+
+.vino-item img {
+  width: 100px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+.vino-item p {
+  font-weight: bold;
+  text-align: right;
+}
+
+/* Estructura del panel de detalles */
+.modal-content {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 8px;
+  min-width: 550px;
+  width: auto;
+  padding: 20px;
+}
+  
+.vino-foto {
+  grid-row: span 5 / span 5;
+  gap: 15px;
+}
+.vino-foto img {
+  width: 100px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 5px;
+}
+.info-vino {
+  grid-column: span 4 / span 4;
+  grid-row: span 4 / span 4;
+  text-align: right;
+  object-fit: contain;
+}
+
+.botones-vino {
+  grid-column: span 4 / span 4;
+  grid-column-start: 2;
+  grid-row-start: 5;
+  display: flex;
+  justify-content: end;
+  gap: 5px;
+  padding-top: 20px;
+  object-fit: contain;
+}
+      
+.vino-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.vino-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.btn-delete {
+  background: #ff4d79;
+  color: white;
+}

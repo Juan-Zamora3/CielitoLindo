@@ -1,0 +1,37 @@
+.ordenes-container {
+    width: 100%;
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .encabezado {
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 10px 0;
+    border-radius: 5px;
+  }
+  
+  .ordenes-scroll {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+  
+  .ordenes-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .btn-finalizar {
+    background: #ff4d79;
+    color: white;
+  }
+  

@@ -1,0 +1,53 @@
+.admin-container {
+  width: 95%;
+  min-width: 900px;
+  min-height: 80vh;
+  margin: 5vh auto;
+  padding: 30px;
+  background: rgba(232, 198, 198, 0.2);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.admin-image {
+  width: 45%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+.grid-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.menu-item {
+  flex: 1;
+  max-width: 200px;
+  padding: 15px;
+  font-size: 18px;
+  background: rgba(63, 63, 63, 0.452);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+}

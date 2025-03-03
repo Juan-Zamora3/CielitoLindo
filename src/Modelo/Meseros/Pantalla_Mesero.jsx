@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../Controlador/firebaseConfig";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import "../../Vista/Meseros/Pantalla_Mesero.css";
-import logo from "../../assets/logo.png";      // Logo del negocio
 import mesaIcon from "../../assets/mesas.png"; // Icono para las mesas
-
 
 const SeccionMeseros = () => {
   const [mesaSeleccionada, setMesaSeleccionada] = useState(null);
@@ -12,21 +10,24 @@ const SeccionMeseros = () => {
   const [vinoSeleccionado, setVinoSeleccionado] = useState(null);
   const [orden, setOrden] = useState([]);
   const [mostrarOrden, setMostrarOrden] = useState(false);
+  const [vinos, setVinos] = useState([]); // Estado para almacenar los vinos desde la BD
 
-  const mesas = [
-    { numero: 1 },
-    { numero: 2 },
-    { numero: 3 },
-    { numero: 4 },
-    { numero: 5 },
-    { numero: 6 },
-  ];
+  useEffect(() => {
+    const obtenerVinos = async () => {
+      try {
+        const snapshot = await getDocs(collection(db, "vinos"));
+        const vinosDB = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setVinos(vinosDB);
+      } catch (error) {
+        console.error("Error al obtener vinos:", error);
+      }
+    };
 
-  const vinos = [
-    { id: 1, nombre: "Vino Tinto", imagen: "ruta/vino1.png", precio: 200 },
-    { id: 2, nombre: "Vino Blanco", imagen: "ruta/vino2.png", precio: 180 },
-    { id: 3, nombre: "Vino Rosado", imagen: "ruta/vino3.png", precio: 190 },
-  ];
+    obtenerVinos();
+  }, []);
 
   const seleccionarMesa = (mesa) => {
     setMesaSeleccionada(mesa);
@@ -62,21 +63,21 @@ const SeccionMeseros = () => {
         <>
           <h2>Selecciona una Mesa</h2>
           <div className="mesas-grid">
-            {mesas.map((mesa, index) => (
+            {[1, 2, 3, 4, 5, 6].map((numero) => (
               <div
-                key={index}
+                key={numero}
                 className="mesa-item"
-                onClick={() => seleccionarMesa(mesa)}
+                onClick={() => seleccionarMesa({ numero })}
               >
-                <img src={mesaIcon} alt={`Mesa ${mesa.numero}`} />
-                <p>Mesa {mesa.numero}</p>
+                <img src={mesaIcon} alt={`Mesa ${numero}`} />
+                <p>Mesa {numero}</p>
               </div>
             ))}
           </div>
         </>
       )}
 
-      {/* Sección de vinos (visible solo después de seleccionar una mesa) */}
+      {/* Sección de vinos */}
       {mesaSeleccionada && (
         <>
           <h2>Mesa {mesaSeleccionada.numero}</h2>
@@ -98,22 +99,25 @@ const SeccionMeseros = () => {
               .map((vino) => (
                 <div
                   key={vino.id}
-                  className="vino-item"
+                  className="vinomeseros-item"
                   onClick={() => seleccionarVino(vino)}
                 >
-                  <img src={vino.imagen} alt={vino.nombre} />
-                  <p>{vino.nombre}</p>
+                  <img src={vino.imagenURL} alt={vino.nombre} />
+                  <div className="info-vino">
+                    <p>{vino.nombre}</p>
+                    <span>${vino.precio}</span>
+                  </div>
                 </div>
               ))}
           </div>
         </>
       )}
 
-      {/* Vista completa del vino */}
+      {/* Modal de selección de vino */}
       {vinoSeleccionado && (
         <div className="modal">
-          <div className="modal-content">
-            <img src={vinoSeleccionado.imagen} alt={vinoSeleccionado.nombre} />
+        <div className="modalmeseros-content">
+            <img src={vinoSeleccionado.imagenURL} alt={vinoSeleccionado.nombre} />
             <h3>{vinoSeleccionado.nombre}</h3>
             <p>Precio: ${vinoSeleccionado.precio}</p>
             <div>
@@ -142,7 +146,7 @@ const SeccionMeseros = () => {
 
       {/* Panel de orden */}
       {mostrarOrden && (
-        <div className="orden-panel">
+        <div className="ordenmesero-panel">
           <h3>Orden - Mesa {mesaSeleccionada.numero}</h3>
           <ul>
             {orden.map((item, index) => (
@@ -164,4 +168,3 @@ const SeccionMeseros = () => {
 };
 
 export default SeccionMeseros;
-

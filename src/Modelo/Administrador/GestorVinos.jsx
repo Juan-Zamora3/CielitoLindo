@@ -118,7 +118,7 @@ const GestorVinos = () => {
   return (
     
     <div className="gestion-vinos">
-      <button className="btn-volver" onClick={() => navigate("/administrador")}> Volver</button>
+      <button className="btn-volver" onClick={() => navigate("/administrador")}>X</button>
       <div className="busqueda-container">
         <input 
           type="text" 

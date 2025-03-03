@@ -6,7 +6,7 @@ import PantallaMesero from "./Modelo/Meseros/Pantalla_Mesero.jsx";
 import PantallaAdministrador from "./Modelo/Administrador/Pantalla_Administrador.jsx";
 import GestorVinos from "./Modelo/Administrador/GestorVinos.jsx";
 import OrdenesAdministrador from "./Modelo/Administrador/OrdenesAdministrador.jsx";
-import "./index.css";
+// import "./index.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

@@ -157,7 +157,7 @@ const SeccionMeseros = () => {
                   <img src={vino.imagenURL} alt={vino.nombre} />
                   <div className="info-vino">
                     <p>{vino.nombre}</p>
-                    <span>${vino.precio}</span>
+                    <span>${vino.precioBotella}</span>
                   </div>
                 </div>
               ))}
@@ -196,16 +196,16 @@ const SeccionMeseros = () => {
                 <input type="number" min="0" defaultValue="0" id="copas" />
               </div>
             <div className="botonesmeseros-vinos">
-              <button
-                onClick={() => {
-                  agregarAOrden(
-                    vinoSeleccionado,
-                    parseInt(document.getElementById("botellas").value) || 0,
-                    parseInt(document.getElementById("copas").value) || 0
-                  );
-                  calcularTotal();
-                }}
-              >
+                <button
+                  onClick={() => {
+                    agregarAOrden(
+                      vinoSeleccionado,
+                      parseInt(document.getElementById("botellas").value) || 0,
+                      parseInt(document.getElementById("copas").value) || 0
+                    );
+                    calcularTotal();
+                  }}
+                >
                 Agregar a orden
               </button>
               <button onClick={() => setVinoSeleccionado(null)}>Cerrar</button>

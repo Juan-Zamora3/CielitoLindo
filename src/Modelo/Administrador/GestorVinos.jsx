@@ -85,6 +85,26 @@ const GestorVinos = () => {
     setArchivoCSV(e.target.files[0]);
   };
 
+  const manejarSeleccionImagen = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+  
+    if (!["image/png", "image/jpeg"].includes(file.type)) {
+      alert("Solo se permiten imágenes en formato PNG o JPG");
+      return;
+    }
+  
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setNuevoVino((prevVino) => ({
+        ...prevVino,
+        imagenURL: reader.result, // Guardar la URL base64
+      }));
+    };
+    reader.readAsDataURL(file);
+  };
+  
+
   const procesarCSV = async () => {
     if (!archivoCSV) return alert("Por favor, selecciona un archivo CSV");
     
@@ -126,7 +146,7 @@ const GestorVinos = () => {
           value={busqueda} 
           onChange={(e) => setBusqueda(e.target.value)} 
         />
-        <button onClick={() => { setMostrarFormulario(true); setModoEdicion(false); }}>Agregar Vino</button>
+        <button className="Botonagregar" onClick={() => { setMostrarFormulario(true); setModoEdicion(false); }}>Agregar Vino</button>
       </div>
 
       {(mostrarFormulario || modoEdicion) && (
@@ -135,7 +155,7 @@ const GestorVinos = () => {
             <h2>{modoEdicion ? "Editar Vino" : "Agregar Vino"}</h2>
             <div className="formulario-vino">
               {Object.keys(nuevoVino).map((key) => (
-                key !== "id" && ( // No mostrar ni editar el ID
+                key !== "id" && key !== "imagenURL" && (
                   <input 
                     key={key}
                     type={key.includes("precio") ? "number" : "text"} 
@@ -151,6 +171,19 @@ const GestorVinos = () => {
                   />
                 )
               ))}
+              <input 
+                type="file" 
+                accept="image/png, image/jpeg" 
+                onChange={manejarSeleccionImagen} 
+              />
+              {nuevoVino.imagenURL && (
+                <img 
+
+                  src={nuevoVino.imagenURL} 
+                  alt="Vista previa" 
+                  style={{ width: "100px", height: "100px", marginTop: "10px" }} 
+                />
+              )}
               <button onClick={modoEdicion ? editarVino : agregarVino}>{modoEdicion ? "Guardar Cambios" : "Agregar"}</button>
               <input className="input-csv" type="file" accept=".csv" onChange={manejarArchivoCSV} />
               <button onClick={procesarCSV}>Agregar desde CSV</button>

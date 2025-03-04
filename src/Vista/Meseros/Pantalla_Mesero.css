@@ -13,7 +13,21 @@
   padding: 20px;
 
 }
-
+h2{
+  color: #aaa;
+}
+button{
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(to right, #ff4d79, #b3126d);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+}
 .imagenvinomeseros {
   grid-column: span 2 / span 2;
   grid-row: span 7 / span 7;

@@ -168,44 +168,51 @@ const SeccionMeseros = () => {
       {/* Modal de selección de vino */}
       {vinoSeleccionado && (
         <div className="modal">
+
+
           <div className="modalmeseros-content">
             <img
               className="imagenvinomeseros"
               src={vinoSeleccionado.imagenURL}
               alt={vinoSeleccionado.nombre}
             />
-            <h3>{vinoSeleccionado.nombre}</h3>
-            <p>Region : {vinoSeleccionado.region}</p>
-            <p>Variedad de Uva : {vinoSeleccionado.variedadUva}</p>
-            <p>Tipo : {vinoSeleccionado.tipo}</p>
-            <p>Añada : {vinoSeleccionado.anada}</p>
-            <p>Nota Cata : {vinoSeleccionado.notaCata}</p>
-            <p>Graduacion : {vinoSeleccionado.graduacion}</p>
-            <p>Precio por botella: ${vinoSeleccionado.precioBotella}</p>
-            <p>Precio por copa: ${vinoSeleccionado.precioCopa}</p>
-
-            <div>
-              <label>Botellas:</label>
-              <input type="number" min="0" defaultValue="0" id="botellas" />
+            <div className="infomeseros-vinos">
+              <h3>{vinoSeleccionado.nombre}</h3>
+              <p>Region : {vinoSeleccionado.region}</p>
+              <p>Variedad de Uva : {vinoSeleccionado.variedadUva}</p>
+              <p>Tipo : {vinoSeleccionado.tipo}</p>
+              <p>Añada : {vinoSeleccionado.anada}</p>
+              <p>Nota Cata : {vinoSeleccionado.notaCata}</p>
+              <p>Graduacion : {vinoSeleccionado.graduacion}</p>
+              <p>Precio por botella: ${vinoSeleccionado.precioBotella}</p>
+              <p>Precio por copa: ${vinoSeleccionado.precioCopa}</p>
             </div>
-            <div>
-              <label>Copas:</label>
-              <input type="number" min="0" defaultValue="0" id="copas" />
+              <div className="vinosbotellas">
+                <label>Botellas:</label>
+                <input type="number" min="0" defaultValue="0" id="botellas" />
+              </div>
+              <div className="vinoscopas">
+                <label>Copas:</label>
+                <input type="number" min="0" defaultValue="0" id="copas" />
+              </div>
+            <div className="botonesmeseros-vinos">
+              <button
+                onClick={() => {
+                  agregarAOrden(
+                    vinoSeleccionado,
+                    parseInt(document.getElementById("botellas").value) || 0,
+                    parseInt(document.getElementById("copas").value) || 0
+                  );
+                  calcularTotal();
+                }}
+              >
+                Agregar a orden
+              </button>
+              <button onClick={() => setVinoSeleccionado(null)}>Cerrar</button>
             </div>
-            <button
-              onClick={() => {
-                agregarAOrden(
-                  vinoSeleccionado,
-                  parseInt(document.getElementById("botellas").value) || 0,
-                  parseInt(document.getElementById("copas").value) || 0
-                );
-                calcularTotal();
-              }}
-            >
-              Agregar a orden
-            </button>
-            <button onClick={() => setVinoSeleccionado(null)}>Cerrar</button>
           </div>
+
+
         </div>
       )}
 

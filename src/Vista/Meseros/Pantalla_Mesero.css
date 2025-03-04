@@ -9,8 +9,19 @@
  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
   margin: 10vh auto;
   width: 100%;
+  height: 80vh; 
   padding: 20px;
+
 }
+
+.imagenvinomeseros {
+  width: 100%; /* Se ajusta al ancho del contenedor */
+  max-width: 50px; /* Máximo tamaño de 80px */
+  height: auto; /* Mantiene la proporción de la imagen */
+  object-fit: contain; /* Asegura que la imagen no se distorsione */
+  border-radius: 5px;
+}
+
 
 /* Encabezado con logo */
 .mesero-header {
@@ -62,13 +73,14 @@ h2 {
 /* Grid de Vinos */
 .vinos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
   gap: 20px;
   max-width: 700px;
+  max-height: 10px; 
   margin: 20px auto;
   margin-top: 20px;
-  align-items: stretch;
-  min-height: 500px;
+  align-items: start;
+  overflow-y: auto; 
 }
 .vinomeseros-item {
   display: flex;
@@ -130,8 +142,15 @@ h2 {
   height: 220px;
   object-fit: cover;
   border-radius: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
+.botones-container {
+  margin-top: auto; /* Empuja los botones hacia el fondo */
+  text-align: center; /* Centra los botones */
+  width: 100%;
+}
+
+/* Estilos de los botones */
 .btn-confirm,
 .btn-cancel {
   padding: 10px 20px;
@@ -139,19 +158,24 @@ h2 {
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  width: 100%; /* Los botones ocupan todo el ancho disponible */
 }
+
 .btn-confirm {
   background: #81024c;
   color: #ffffff;
   font-weight: bold;
 }
+
 .btn-confirm:hover {
   background: #ff9900;
 }
+
 .btn-cancel {
   background: #ffffff;
   color: #333;
 }
+
 .btn-cancel:hover {
   background: #aaa;
 }
@@ -160,6 +184,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-right: 320px;
 }
 
 .busqueda-container input {
@@ -204,4 +229,24 @@ h2 {
   padding: 20px;
   overflow-y: auto;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 10; /* Asegura que el panel esté por encima de otros elementos */
 }
+.ordenmesero-panel {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100%; /* Ahora toma el 100% de la altura de la pantalla */
+  background: rgba(0, 0, 0, 0.281); /* Fondo semitransparente */
+  padding: 20px;
+  overflow-y: auto;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.432);
+  z-index: 10;
+  display: flex; 
+  flex-direction: column;
+}
+.ordenmesero-panel .producto {
+  margin-bottom: 15px; /* Separa cada producto */
+}
+
+

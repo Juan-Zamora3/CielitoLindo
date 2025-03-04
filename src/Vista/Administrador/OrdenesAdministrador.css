@@ -97,6 +97,24 @@
     font-size: 3.2em;
     line-height: 1.1;
   }
+  .fila.activo {
+    background-color: #4ee75b; /* Verde claro */
+    transition: background-color 0.3s ease;
+  }
+  
+  .fila.activo:hover {
+    background-color: #ffffff; /* Verde más fuerte al pasar el cursor */
+  }
+  
+  /* Estilo de la fila finalizada */
+  .fila.finalizado {
+    background-color: #ee3749; /* Rojo claro */
+    transition: background-color 0.3s ease;
+  }
+  
+  .fila.finalizado:hover {
+    background-color: #f8bbd0; /* Rojo más oscuro al pasar el cursor */
+  }
   
   button {
     border-radius: 8px;
